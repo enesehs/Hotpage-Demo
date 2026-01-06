@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
                     {/* Logo & Description */}
                     <div className="md:col-span-2">
                         <img
-                            src="/header-logo.webp"
+                            src={`${import.meta.env.BASE_URL}header-logo.webp`}
                             alt="Hotpage"
                             className="h-16 w-auto opacity-90 mb-6"
                         />

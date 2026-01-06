@@ -45,7 +45,7 @@ export const FloatingHeader: React.FC = () => {
                     <div className="px-4 md:px-8 h-14 flex items-center justify-center gap-4 md:gap-8">
                         {/* Logo */}
                         <img
-                            src="/header-logo.webp"
+                            src={`${import.meta.env.BASE_URL}header-logo.webp`}
                             alt="Hotpage"
                             className="h-10 md:h-16 w-auto"
                             style={{ opacity: 0.5 }}

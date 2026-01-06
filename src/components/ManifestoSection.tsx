@@ -201,7 +201,7 @@ export const ManifestoSection: React.FC = () => {
                         <div className="space-y-4">
                             <div
                                 className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-6 h-64 flex flex-col justify-center items-center group cursor-pointer hover:border-green-500/30 transition-colors"
-                                onClick={() => setModalImage({ src: '/LCP.webp', alt: 'LCP Performance Report' })}
+                                onClick={() => setModalImage({ src: `${import.meta.env.BASE_URL}LCP.webp`, alt: 'LCP Performance Report' })}
                             >
                                 <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -270,7 +270,7 @@ export const ManifestoSection: React.FC = () => {
                         <div className="space-y-4">
                             <div
                                 className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-6 h-64 flex flex-col justify-center items-center group cursor-pointer hover:border-green-500/30 transition-colors"
-                                onClick={() => setModalImage({ src: '/lighthouse.webp', alt: 'Lighthouse Performance Report' })}
+                                onClick={() => setModalImage({ src: `${import.meta.env.BASE_URL}lighthouse.webp`, alt: 'Lighthouse Performance Report' })}
                             >
                                 <motion.div
                                     className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"

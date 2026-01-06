@@ -87,7 +87,7 @@ export const VideoShowcase: React.FC = () => {
                             {/* Video Player */}
                             <video
                                 ref={videoRef}
-                                src={`/videos/${videos[activeVideo].id}.mp4`}
+                                src={`${import.meta.env.BASE_URL}videos/${videos[activeVideo].id}.mp4`}
                                 muted
                                 playsInline
                                 preload="auto"
