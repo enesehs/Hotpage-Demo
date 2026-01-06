@@ -194,8 +194,8 @@ export const fr = {
                 content: "Les Notes Adhésives sont un sauveur. Ma page d'accueil est enfin propre et rapide."
             },
             {
-                name: "Danielle F.",
-                content: "La synchro auto est géniale. Je peux commencer une idée dans un onglet et la finir dans un autre. Simple, mais puissant."
+                name: "Kadir Efe P.",
+                content: "Je considère cette extension comme une amélioration significative par rapport à l'interface standard de Google, offrant un mélange supérieur de vitesse, d'esthétique et de fonctionnalité. En tant qu'étudiant en traduction, je trouve la fonction de bloc-notes intégrée indispensable à mon travail quotidien."
             }
         ]
     },

@@ -194,8 +194,8 @@ export const es = {
                 content: "Las Notas Adhesivas son un salvavidas. Mi página de inicio por fin se ve limpia y funciona rápido."
             },
             {
-                name: "Danielle F.",
-                content: "La auto-sincronización es brillante. Puedo empezar una idea en una pestaña y terminarla en otra. Simple, pero poderoso."
+                name: "Kadir Efe P.",
+                content: "Considero esta extensión una mejora significativa frente a la interfaz estándar de Google, ofreciendo una combinación superior de velocidad, estética y funcionalidad. Como estudiante de traducción, la función de bloc de notas integrado me resulta indispensable para mi flujo de trabajo diario."
             }
         ]
     },

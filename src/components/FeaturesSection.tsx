@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Zap, Shield, Palette, Puzzle, Globe, RefreshCw } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
+
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

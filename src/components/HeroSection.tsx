@@ -12,17 +12,50 @@ const FloatingWidget: React.FC<{
     speedY: number;
     speedX: number; // Positive = move right, Negative = move left
     delay?: number;
-}> = ({ children, className = '', style, scrollY, baseY, speedY, speedX, delay = 0 }) => {
+    heroRef?: React.RefObject<HTMLHeadingElement | null>;
+}> = ({ children, className = '', style, scrollY, baseY, speedY, speedX, delay = 0, heroRef }) => {
+    const widgetRef = useRef<HTMLDivElement>(null);
+    const [isOverlapping, setIsOverlapping] = useState(false);
     const y = useTransform(scrollY, [0, 600], [baseY, baseY + speedY]);
     const x = useTransform(scrollY, [0, 600], [0, speedX]);
-    const opacity = useTransform(scrollY, [0, 600], [1, 0]);
+    const scrollOpacity = useTransform(scrollY, [0, 600], [1, 0]);
     const scale = useTransform(scrollY, [0, 600], [1, 0.8]);
+
+    // Check for overlap with hero text
+    useEffect(() => {
+        const checkOverlap = () => {
+            if (!widgetRef.current || !heroRef?.current) return;
+
+            const widgetRect = widgetRef.current.getBoundingClientRect();
+            const heroRect = heroRef.current.getBoundingClientRect();
+
+            // Check if bounding boxes intersect
+            const overlap = !(
+                widgetRect.right < heroRect.left ||
+                widgetRect.left > heroRect.right ||
+                widgetRect.bottom < heroRect.top ||
+                widgetRect.top > heroRect.bottom
+            );
+
+            setIsOverlapping(overlap);
+        };
+
+        checkOverlap();
+        window.addEventListener('scroll', checkOverlap);
+        window.addEventListener('resize', checkOverlap);
+
+        return () => {
+            window.removeEventListener('scroll', checkOverlap);
+            window.removeEventListener('resize', checkOverlap);
+        };
+    }, [heroRef]);
 
     return (
         <motion.div
-            style={{ y, x, opacity, scale, ...style }}
+            ref={widgetRef}
+            style={{ y, x, opacity: isOverlapping ? 0 : scrollOpacity, scale, ...style }}
             initial={{ opacity: 0, y: baseY + 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: baseY, scale: 1 }}
+            animate={{ opacity: isOverlapping ? 0 : 1, y: baseY, scale: 1 }}
             transition={{ duration: 0.8, delay, ease: 'easeOut' }}
             className={`absolute backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl ${className}`}
         >
@@ -137,7 +170,7 @@ const CurrenciesWidget = () => (
 );
 
 // Main Floating Widgets Container
-const FloatingWidgets: React.FC<{ scrollY: MotionValue<number> }> = ({ scrollY }) => {
+const FloatingWidgets: React.FC<{ scrollY: MotionValue<number>; heroRef: React.RefObject<HTMLHeadingElement | null> }> = ({ scrollY, heroRef }) => {
     return (
         <div className="hidden xl:block absolute inset-0 overflow-hidden pointer-events-none z-0">
             {/* Sticky Note - Top Right */}
@@ -147,7 +180,8 @@ const FloatingWidgets: React.FC<{ scrollY: MotionValue<number> }> = ({ scrollY }
                 speedY={120}
                 speedX={150}
                 delay={0.1}
-                style={{ right: '12%', top: '8%', transform: 'rotate(-6deg) perspective(1000px) rotateY(-5deg)' }}
+                heroRef={heroRef}
+                style={{ right: '2%', top: '2%', transform: 'rotate(-6deg) perspective(1000px) rotateY(-5deg)' }}
             >
                 <StickyNoteWidget />
             </FloatingWidget>
@@ -159,7 +193,8 @@ const FloatingWidgets: React.FC<{ scrollY: MotionValue<number> }> = ({ scrollY }
                 speedY={80}
                 speedX={180}
                 delay={0.2}
-                style={{ right: '8%', top: '38%', transform: 'rotate(3deg) perspective(1000px) rotateY(-8deg)' }}
+                heroRef={heroRef}
+                style={{ right: '5%', top: '42%', transform: 'rotate(3deg) perspective(1000px) rotateY(-8deg)' }}
             >
                 <TodoWidget />
             </FloatingWidget>
@@ -171,7 +206,8 @@ const FloatingWidgets: React.FC<{ scrollY: MotionValue<number> }> = ({ scrollY }
                 speedY={100}
                 speedX={-150}
                 delay={0.15}
-                style={{ left: '10%', top: '12%', transform: 'rotate(4deg) perspective(1000px) rotateY(5deg)' }}
+                heroRef={heroRef}
+                style={{ left: '4%', top: '12%', transform: 'rotate(4deg) perspective(1000px) rotateY(5deg)' }}
             >
                 <WeatherWidget />
             </FloatingWidget>
@@ -183,7 +219,8 @@ const FloatingWidgets: React.FC<{ scrollY: MotionValue<number> }> = ({ scrollY }
                 speedY={90}
                 speedX={-180}
                 delay={0.25}
-                style={{ left: '12%', top: '42%', transform: 'rotate(-2deg) perspective(1000px) rotateY(8deg)' }}
+                heroRef={heroRef}
+                style={{ left: '8%', top: '42%', transform: 'rotate(-2deg) perspective(1000px) rotateY(8deg)' }}
             >
                 <PomodoroWidget />
             </FloatingWidget>
@@ -195,7 +232,8 @@ const FloatingWidgets: React.FC<{ scrollY: MotionValue<number> }> = ({ scrollY }
                 speedY={60}
                 speedX={120}
                 delay={0.3}
-                style={{ right: '14%', top: '62%', transform: 'rotate(-4deg) perspective(1000px) rotateY(-6deg)' }}
+                heroRef={heroRef}
+                style={{ right: '12%', top: '69%', transform: 'rotate(-4deg) perspective(1000px) rotateY(-6deg)' }}
             >
                 <CurrenciesWidget />
             </FloatingWidget>
@@ -471,6 +509,7 @@ export const HeroSection: React.FC = () => {
     const [releaseVersion, setReleaseVersion] = useState<string | null>(null);
     const [badgeHovered, setBadgeHovered] = useState(false);
     const [badgeClicked, setBadgeClicked] = useState(false);
+    const heroRef = useRef<HTMLHeadingElement>(null);
 
     // Detect browser
     useEffect(() => {
@@ -498,8 +537,6 @@ export const HeroSection: React.FC = () => {
             case 'edge': return t.hero.cta.edge;
             case 'opera': return t.hero.cta.opera;
             case 'zen': return t.hero.cta.zen;
-            // @ts-ignore - Safari not in BrowserType but can be 'other'
-            case 'safari': return t.hero.cta.safari;
             default: return t.hero.cta.other;
         }
     };
@@ -513,9 +550,9 @@ export const HeroSection: React.FC = () => {
     const { scrollY } = useScroll();
 
     return (
-        <main id="features" className="relative flex flex-col items-center justify-center pt-96 pb-32 text-center overflow-hidden">
+        <main id="features" className="relative flex flex-col items-center justify-center pt-32 md:pt-48 pb-32 text-center overflow-hidden">
             {/* Floating Widgets - Desktop Only */}
-            <FloatingWidgets scrollY={scrollY} />
+            <FloatingWidgets scrollY={scrollY} heroRef={heroRef} />
             <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
                 <motion.div
                     variants={containerVariants}
@@ -558,7 +595,7 @@ export const HeroSection: React.FC = () => {
                     </motion.div>
 
                     {/* Headline with Text Morphing */}
-                    <motion.h1 variants={itemVariants} className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight">
+                    <motion.h1 ref={heroRef} variants={itemVariants} className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight">
                         <span className="text-white">{t.hero.headline.prefix}</span> <br className="hidden md:block" />
                         <div className="h-[1.2em] flex justify-center items-center">
                             <TextMorph texts={t.hero.morphText} />

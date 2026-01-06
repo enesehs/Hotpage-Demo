@@ -3,96 +3,134 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    scroll-behavior: smooth;
-  }
+    * {
+        scroll-behavior: smooth;
+    }
 
-  /* Cabinet Grotesk for body text */
-  body {
-    font-family: 'Cabinet Grotesk', system-ui, sans-serif;
-  }
+    /* Cabinet Grotesk for body text */
+    body {
+        font-family: 'Cabinet Grotesk', system-ui, sans-serif;
+    }
 
-  /* Clash Display for all headings */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'Clash Display', system-ui, sans-serif;
-  }
+    /* Clash Display for all headings */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Clash Display', system-ui, sans-serif;
+    }
 }
 
 :root {
-  line-height: 1.5;
-  font-weight: 400;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
+    color-scheme: dark;
+    color: rgba(255, 255, 255, 0.87);
 
-  /* Color Scheme */
-  --color-1: rgb(33, 33, 33);
-  --color-2: rgb(7, 7, 38);
+    /* Color Scheme */
+    --color-1: rgb(33, 33, 33);
+    --color-2: rgb(7, 7, 38);
 
-  background: linear-gradient(135deg, var(--color-2), var(--color-1));
+    background: linear-gradient(135deg, var(--color-2), var(--color-1));
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 /* Utility classes for explicit font usage */
 .font-heading {
-  font-family: 'Clash Display', system-ui, sans-serif;
+    font-family: 'Clash Display', system-ui, sans-serif;
 }
 
 .font-body {
-  font-family: 'Cabinet Grotesk', system-ui, sans-serif;
+    font-family: 'Cabinet Grotesk', system-ui, sans-serif;
 }
 
 /* Noise Texture Overlay */
 .noise-overlay::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.03;
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
 }
 
 /* Animation Delays for Blobs */
 .animation-delay-2000 {
-  animation-delay: 2s;
+    animation-delay: 2s;
 }
 
 .animation-delay-4000 {
-  animation-delay: 4s;
+    animation-delay: 4s;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-10deg);
+    }
+
+    50% {
+        transform: scale(1.05) rotate(2deg);
+    }
+
+    70% {
+        transform: scale(0.95) rotate(-1deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+}
+
+.animate-bounce-in {
+    animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }

@@ -186,7 +186,7 @@ export const en = {
         }
     },
     testimonials: {
-        title: "Community Love",
+        title: "Community Loves Us",
         subtitle: "Real feedback from early adopters.",
         items: [
             {
@@ -194,8 +194,8 @@ export const en = {
                 content: "The Sticky Notes are a lifesaver. My start page finally looks clean and works fast."
             },
             {
-                name: "Danielle F.",
-                content: "Auto-sync is brilliant. I can start a thought in one tab and finish it in another. Simple, yet powerful."
+                name: "Kadir Efe P.",
+                content: "I consider this extension a significant upgrade over the standard Google interface, offering a superior blend of speed, aesthetics, and functionality. As a translation student, I find the integrated notepad feature indispensable for my daily workflow."
             }
         ]
     },

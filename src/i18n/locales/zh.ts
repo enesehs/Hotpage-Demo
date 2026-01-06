@@ -8,7 +8,7 @@ export const zh = {
     },
     hero: {
         badge: {
-            released: "v1.0 正式发布",
+            released: "發布",
             openSource: "100% 开源"
         },
         headline: {
@@ -194,8 +194,8 @@ export const zh = {
                 content: "便签功能简直是救星。我的起始页终于看起来清爽且运行飞快了。"
             },
             {
-                name: "Danielle F.",
-                content: "自动同步功能太棒了。我可以在一个标签页开始思考，在另一个标签页继续。简单却强大。"
+                name: "Kadir Efe P.",
+                content: "我认为该扩展程序是对标准 Google 界面的重大升级，完美结合了速度、美观和功能性。作为一名翻译专业的学生，我发现内置的记事本功能对于我的日常工作流程来说是不可或缺的。"
             }
         ]
     },

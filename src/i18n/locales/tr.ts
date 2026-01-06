@@ -196,8 +196,8 @@ export const tr = {
                 content: "Yapışkan Notlar hayat kurtarıcı. Başlangıç sayfam sonunda temiz görünüyor ve hızlı çalışıyor."
             },
             {
-                name: "Danielle F.",
-                content: "Otomatik senkronizasyon harika. Bir sekmede düşünmeye başlayıp diğerinde bitirebiliyorum. Basit ama çok güçlü."
+                name: "Kadir Efe P.",
+                content: "Bu eklentiyi; hız, estetik ve işlevselliğin üstün bir karışımını sunması bakımından standart Google arayüzüne kıyasla çok daha iyi buluyorum. Bir tercümanlık öğrencisi olarak, entegre not defteri özelliğini günlük iş ve derslerim için vazgeçilmez buluyorum."
             }
         ]
     },

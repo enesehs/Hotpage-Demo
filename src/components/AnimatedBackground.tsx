@@ -8,6 +8,7 @@ import { motion, useScroll, useVelocity, useTransform, useSpring } from 'framer-
  * - Animated floating orbs
  * - Grid overlay
  */
+
 export const AnimatedBackground: React.FC = () => {
     const { scrollY } = useScroll();
     const scrollVelocity = useVelocity(scrollY);

@@ -8,7 +8,7 @@ export const hi = {
     },
     hero: {
         badge: {
-            released: "Version 1.0 Live Hai",
+            released: "Riha",
             openSource: "100% Open Source"
         },
         headline: {
@@ -194,7 +194,7 @@ export const hi = {
                 content: "Sticky Notes ne meri life aasaan kar di. Mera start page ab saaf dikhta hai aur tez chalta hai."
             },
             {
-                name: "Danielle F.",
+                name: "Kadir Efe P.",
                 content: "Auto-sync toh kamaal hai. Ek tab mein sochna shuru karo, dusre mein khatam. Simple, par powerful."
             }
         ]
