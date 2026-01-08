@@ -30,7 +30,7 @@ export const tr = {
             free: "— Sonsuza Kadar Ücretsiz", // "Tamamen" kelimesi gizli maliyet şüphesini siler.
             demo: "Kurmadan Dene" // "Canlı Demo" yazılım dilidir. "Kurmadan Dene" riski sıfırlar.
         },
-        risk: "Kart gerekmez • Tek tıkla silinebilir • Veri toplamaz",
+        risk: "Kart gerekmez • Üyelik gerekmez • Veri toplamaz",
         morphText: [
             "Odak Merkezin", // "Merkezi" yerine "Merkezin" (Senin merkezin)
             "Üretkenlik Üssün",
@@ -101,7 +101,7 @@ export const tr = {
         }
     },
     manifesto: {
-        title: "Bizim Davamız Ney?",
+        title: "Bizim Manifestomuz",
         p1: "Tarayıcıların birer reklam panosuna dönüşmesini reddediyoruz.",
         p2: "Başlangıç sayfan sakin, odaklı ve sana ait bir sığınak olmalı. Haber akışları ve dikkat dağıtıcılar dışarıda kalmalı.",
         p3: "Sadece senin araçların. Senin estetiğin. Saf fayda.",
@@ -150,7 +150,7 @@ export const tr = {
             ]
         },
         performance: {
-            title: "Söz Değil, Kanıt",
+            title: "Söz Değil, İcraat",
             subtitle: "Rakamların konuşmasına izin veriyoruz.",
             lcp: "Yükleme Süresi",
             trackers: "Takipçi Sayısı",

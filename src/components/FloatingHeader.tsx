@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { Github, Star, ChevronDown, Zap, Eye, Download } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -8,6 +9,7 @@ export const FloatingHeader: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangOpen, setIsLangOpen] = useState(false);
     const langRef = useRef<HTMLDivElement>(null);
+    const langBtnRef = useRef<HTMLButtonElement>(null);
     const { t, language, setLanguage } = useLanguage();
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
@@ -88,42 +90,13 @@ export const FloatingHeader: React.FC = () => {
                         {/* Language Dropdown */}
                         <div ref={langRef} className="hidden md:block relative">
                             <button
+                                ref={langBtnRef}
                                 onClick={() => setIsLangOpen(!isLangOpen)}
-                                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors px-2 py-1 rounded-lg hover:bg-white/5 backdrop-blur-xl"
+                                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors px-2 py-1 rounded-lg hover:bg-white/5"
                             >
-                                <span className="text-base">{languageFlags[language]}</span>
-                                <span className="uppercase text-xs font-medium">{language}</span>
+                                <span className="text-lg">{languageFlags[language]}</span>
                                 <ChevronDown size={14} className={`transition-transform duration-200 ${isLangOpen ? 'rotate-180' : ''}`} />
                             </button>
-
-                            <AnimatePresence>
-                                {isLangOpen && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                                        transition={{ duration: 0.15 }}
-                                        className="absolute top-full mt-2 right-0 w-44 py-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl shadow-indigo-900/20 z-50"
-                                    >
-                                        {(Object.keys(languageNames) as Language[]).map((lang) => (
-                                            <button
-                                                key={lang}
-                                                onClick={() => handleLanguageChange(lang)}
-                                                className={`w-full flex items-center gap-3 px-4 py-2 text-sm transition-all duration-200 ${language === lang
-                                                    ? 'text-white bg-white/10'
-                                                    : 'text-gray-400 hover:text-white hover:bg-white/5'
-                                                    }`}
-                                            >
-                                                <span className="text-base">{languageFlags[lang]}</span>
-                                                <span className="text-xs font-medium">{languageNames[lang]}</span>
-                                                {language === lang && (
-                                                    <span className="ml-auto text-indigo-400 text-xs">✓</span>
-                                                )}
-                                            </button>
-                                        ))}
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
                         </div>
 
                         {/* Divider - Hidden on mobile */}
@@ -281,6 +254,46 @@ export const FloatingHeader: React.FC = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            {/* Language Dropdown Portal */}
+            {createPortal(
+                <AnimatePresence>
+                    {isLangOpen && langBtnRef.current && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                            transition={{ duration: 0.15 }}
+                            className="fixed w-44 py-2 rounded-2xl border border-white/10 shadow-2xl shadow-indigo-900/20 z-[9999]"
+                            style={{ 
+                                top: langBtnRef.current.getBoundingClientRect().bottom + 8,
+                                left: langBtnRef.current.getBoundingClientRect().right - 176,
+                                backgroundColor: 'rgba(27, 27, 60, 0.85)',
+                                backdropFilter: 'blur(12px) saturate(150%)',
+                                WebkitBackdropFilter: 'blur(12px) saturate(150%)'
+                            }}
+                        >
+                            {(Object.keys(languageNames) as Language[]).map((lang) => (
+                                <button
+                                    key={lang}
+                                    onClick={() => handleLanguageChange(lang)}
+                                    className={`w-full flex items-center gap-3 px-4 py-2 text-sm transition-all duration-200 ${language === lang
+                                        ? 'text-white bg-white/10'
+                                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                        }`}
+                                >
+                                    <span className="text-base">{languageFlags[lang]}</span>
+                                    <span className="text-xs font-medium">{languageNames[lang]}</span>
+                                    {language === lang && (
+                                        <span className="ml-auto text-indigo-400 text-xs">✓</span>
+                                    )}
+                                </button>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </>
     );
 };
